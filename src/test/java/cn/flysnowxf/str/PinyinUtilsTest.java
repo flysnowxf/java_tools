@@ -1,7 +1,14 @@
 package cn.flysnowxf.str;
 
+import junit.framework.Assert;
+
+import org.junit.Test;
+
 public class PinyinUtilsTest {
-	public static void main(String[] args) {
-		System.out.println(PinyinUtils.tranStrToPinyin("我们在希望的田野上!"));
+	@Test
+	public void tranStrToPinyin() {
+		String str = "我们在希望的田野上!";
+		String pinyin = "womenzaixiwangdetianyeshang!";
+		Assert.assertEquals(pinyin, PinyinUtils.tranStrToPinyin(str));
 	}
 }

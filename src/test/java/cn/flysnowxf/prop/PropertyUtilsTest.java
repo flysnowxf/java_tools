@@ -1,8 +1,17 @@
 package cn.flysnowxf.prop;
 
+import junit.framework.Assert;
+
+import org.junit.Test;
+
 public class PropertyUtilsTest {
-	public static void main(String[] args) {
-		System.out.println(PropertyUtils.getString("url"));
-		System.out.println(PropertyUtils.getWeakString("test.properties", "name"));
+	@Test
+	public void getString() {
+		Assert.assertEquals("https://github.com/flysnowxf/java_tools", PropertyUtils.getString("url"));
+	}
+	
+	@Test
+	public void getWeakString() {
+		Assert.assertEquals("flysnowxf", PropertyUtils.getWeakString("test.properties", "name"));
 	}
 }
