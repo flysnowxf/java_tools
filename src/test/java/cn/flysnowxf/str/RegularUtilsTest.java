@@ -16,4 +16,16 @@ public class RegularUtilsTest {
 		ip = "10.355.2";
 		Assert.assertFalse(RegularUtils.isIp(ip));
 	}
+	
+	@Test
+	public void isEmail() {
+		String email = "flysnowxf@gmail.com";
+		Assert.assertTrue(RegularUtils.isEmail(email));
+		
+		email = "flysnow=xf@gmail.com";
+		Assert.assertFalse(RegularUtils.isEmail(email));
+		
+		email = "flysnowxf@gmailcom";
+		Assert.assertFalse(RegularUtils.isEmail(email));
+	}
 }
