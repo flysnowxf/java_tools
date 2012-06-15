@@ -17,6 +17,5 @@ public class Base32UtilsTest {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		
 	}
 }
