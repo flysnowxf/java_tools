@@ -6,7 +6,6 @@ import org.apache.commons.httpclient.methods.multipart.Part;
 
 public class HttpRequest {
 	private String url;
-	private String ua;
 	private Header[] header;
 	// for post
 	private NameValuePair[] data;
@@ -20,6 +19,8 @@ public class HttpRequest {
 	// timeout
 	private int connTimeout = 1000;
 	private int soTimeout = 5000;
+	// ua
+	private String ua = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.162 Safari/535.19";
 	
 	public HttpRequest(String url) {
 		this.url = url;

@@ -29,6 +29,7 @@ public class HttpUtils {
 			params.setCredentialCharset(httpRequest.getEncoding());
 			params.setContentCharset(httpRequest.getEncoding());
 		}
+		method.addRequestHeader("User-Agent", httpRequest.getUa());
 		if (httpRequest.getHeader() != null) {
 			for (Header header : httpRequest.getHeader()) {
 				method.addRequestHeader(header);
