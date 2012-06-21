@@ -6,6 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
+		<!-- 没有在公共maven的jar-开始  -->
 		<dependency>
 			<groupId>com.xunjie</groupId>
 			<artifactId>pinyin4j</artifactId>
@@ -13,6 +14,12 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.wltea</groupId>
+			<artifactId>IKAnalyzer</artifactId>
+			<version>3.2.5</version>
+		</dependency>
+		<!-- 没有在公共maven的jar-结束  -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -47,6 +54,11 @@
 			<groupId>org.xbill</groupId>
 			<artifactId>dns</artifactId>
 			<version>2.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
 		</dependency>
 	</dependencies>
 </project>
