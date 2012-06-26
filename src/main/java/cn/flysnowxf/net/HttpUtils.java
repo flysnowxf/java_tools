@@ -37,7 +37,7 @@ public class HttpUtils {
 		}
 	}
 	
-	private static HttpResponse execute(HttpMethod method, HttpRequest httpRequest) throws Exception {
+	private static <T> HttpResponse execute(HttpMethod method, HttpRequest httpRequest, AbstractResultHandler<T> handler) throws Exception {
 		HttpResponse httpResponse = new HttpResponse();
 		
 		HttpClient httpClient = getClient(httpRequest);
@@ -48,6 +48,12 @@ public class HttpUtils {
 			httpResponse.setStatus(status);
 			httpResponse.setHeader(method.getResponseHeaders());
 			httpResponse.setResponse(response);
+			
+			// 处理结果
+			if(handler != null) {
+				handler.handle(status, httpRequest.getUrl(), 
+						response, httpRequest.isLog());
+			}
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -57,13 +63,13 @@ public class HttpUtils {
 		return httpResponse;
 	}
 	
-	public static HttpResponse get(HttpRequest httpRequest) throws Exception {
+	public static <T> HttpResponse get(HttpRequest httpRequest, AbstractResultHandler<T> handler) throws Exception {
 		GetMethod method = new GetMethod(httpRequest.getUrl());
 		packageMethod(method, httpRequest);
-		return execute(method, httpRequest);
+		return execute(method, httpRequest, handler);
 	}
 
-	public static HttpResponse post(HttpRequest httpRequest) throws Exception {
+	public static <T> HttpResponse post(HttpRequest httpRequest, AbstractResultHandler<T> handler) throws Exception {
 		PostMethod method = new PostMethod(httpRequest.getUrl());
 		packageMethod(method, httpRequest);
 		// 普通参数
@@ -80,6 +86,6 @@ public class HttpUtils {
 					new StringRequestEntity(httpRequest.getContent(), 
 							httpRequest.getContentType(), httpRequest.getEncoding()));
 		}
-		return execute(method, httpRequest);
+		return execute(method, httpRequest, handler);
 	}
 }

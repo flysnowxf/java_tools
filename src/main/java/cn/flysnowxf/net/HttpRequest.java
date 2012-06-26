@@ -21,6 +21,8 @@ public class HttpRequest {
 	private int soTimeout = 5000;
 	// ua
 	private String ua = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.162 Safari/535.19";
+	// print log
+	private boolean isLog = true;
 	
 	public HttpRequest(String url) {
 		this.url = url;
@@ -91,5 +93,13 @@ public class HttpRequest {
 	}
 	public void setUa(String ua) {
 		this.ua = ua;
+	}
+
+	public boolean isLog() {
+		return isLog;
+	}
+
+	public void setLog(boolean isLog) {
+		this.isLog = isLog;
 	}
 }
