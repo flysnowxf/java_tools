@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class HttpUtilsTest {
-	class Result {
+	class TestResult {
 		private boolean success;
 
 		public boolean isSuccess() {
@@ -21,24 +21,23 @@ public class HttpUtilsTest {
 	public void get() {
 		String url = "http://g.cn";
 		HttpRequest request = new HttpRequest(url);
-		final Result result = new Result();
 		try {
 			HttpResponse httpResponse = HttpUtils.get(request, 
-						new AbstractResultHandler<Result>() {
+						new AbstractResultHandler<TestResult>() {
 
 					@Override
-					protected boolean isSuccess(String response) {
-						return false;
+					protected Result handleResponse(String response) {
+						return new Result(new TestResult(), true);
 					}
 
 					@Override
-					protected void handleSuccess() {
-						result.setSuccess(true);
+					protected void handleSuccess(TestResult r) {
+						r.setSuccess(true);
 					}
 
 					@Override
-					protected void handleFailure() {
-						result.setSuccess(false);
+					protected void handleFailure(TestResult r) {
+						r.setSuccess(false);
 					}
 
 					@Override
@@ -47,13 +46,9 @@ public class HttpUtilsTest {
 					}
 
 					@Override
-					protected String getSuccessLog() {
-						return "source=g.cn";
-					}
-
-					@Override
-					protected String getFailureLog() {
-						return "source=g.cn";
+					protected String getResultLog(TestResult r) {
+						return "source=g.cn" + 
+							"<|>code=" + r.isSuccess();
 					}
 			});
 			Assert.assertEquals(HttpStatus.SC_OK, httpResponse.getStatus());
