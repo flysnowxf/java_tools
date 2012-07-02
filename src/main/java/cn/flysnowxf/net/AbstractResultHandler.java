@@ -10,6 +10,11 @@ public abstract class AbstractResultHandler<T> {
 	public static final SimpleDateFormat BASIC = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static final Logger log = Logger.getLogger(AbstractResultHandler.class);
 	
+	/**
+	 * 处理响应结果方法，出现异常返回null
+	 * @param response
+	 * @return
+	 */
 	protected abstract Result handleResponse(String response);
 	protected abstract void handleSuccess(T t);
 	protected abstract void handleFailure(T t);
@@ -24,17 +29,21 @@ public abstract class AbstractResultHandler<T> {
 				
 				if(result.isSuccess()){
 					handleSuccess(t);
-					log.info("at=" + BASIC.format(new Date()) +
-							"<|>url=" + url +
-							"<|>success=true" +
-							"<|>" + getResultLog(t));
+					if(isLog) {
+						log.info("at=" + BASIC.format(new Date()) +
+								"<|>url=" + url +
+								"<|>success=true" +
+								"<|>" + getResultLog(t));
+					}
 				}
 				else {
 					handleFailure(t);
-					log.error("at=" + BASIC.format(new Date()) +
-							"<|>url=" + url +
-							"<|>success=false" +
-							"<|>" + getResultLog(t));
+					if(isLog) {
+						log.error("at=" + BASIC.format(new Date()) +
+								"<|>url=" + url +
+								"<|>success=false" +
+								"<|>" + getResultLog(t));
+					}
 				}
 			}
 		}
