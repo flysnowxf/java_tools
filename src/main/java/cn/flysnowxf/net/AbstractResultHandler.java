@@ -11,17 +11,28 @@ public abstract class AbstractResultHandler<T> {
 	private static final Logger log = Logger.getLogger(AbstractResultHandler.class);
 	
 	/**
-	 * 处理响应结果方法，出现异常返回null
+	 * 处理响应结果方法
 	 * @param response
 	 * @return
 	 */
 	protected abstract Result handleResponse(String response);
-	protected abstract void handleSuccess(T t);
-	protected abstract void handleFailure(T t);
-	protected abstract void handleStatusFailure();
-	protected abstract void handleException(Exception e);
-	protected abstract String getStatusLog();
-	protected abstract String getResultLog(T t);
+	/**
+	 * 以下方法默认不实现内容，需要实现覆盖即可
+	 */
+	protected void handleSuccess(T t) {
+	}
+	protected void handleFailure(T t) {
+	}
+	protected void handleStatusFailure() {
+	}
+	protected void handleException(Exception e) {
+	}
+	protected String getStatusLog() {
+		return "";
+	}
+	protected String getResultLog(T t) {
+		return "";
+	}
 
 	public void handle(int status, String url, String response, boolean isLog) {
 		if(status == HttpStatus.SC_OK) {

@@ -35,7 +35,7 @@ public class HttpUtilsTest {
 		String url = "http://g.cn";
 		HttpRequest request = new HttpRequest(url);
 		HttpResponse httpResponse = HttpUtils.get(request, new AbstractResultHandler<TestResult>() {
-
+			
 				@Override
 				protected Result handleResponse(String response) {
 					return new Result(new TestResult(), true);
@@ -75,6 +75,17 @@ public class HttpUtilsTest {
 		if(callResult.success) {
 			Assert.assertEquals(HttpStatus.SC_OK, httpResponse.getStatus());
 		}
+		
+		// 不覆盖方法
+		httpResponse = HttpUtils.get(request, new AbstractResultHandler<TestResult>() {
+
+			@Override
+			protected Result handleResponse(
+					String response) {
+				return new Result(new TestResult(), true);
+			}
+			
+		});
 	}
 	
 	@Test
@@ -82,8 +93,8 @@ public class HttpUtilsTest {
 		String url = "http://g.cn";
 		HttpRequest request = new HttpRequest(url);
 		try {
-			HttpResponse httpResponse = HttpUtils.post(request, null);
-			Assert.assertEquals(HttpStatus.SC_OK, httpResponse.getStatus());
+			HttpResponse httpResponse = HttpUtils.post(request);
+			Assert.assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED, httpResponse.getStatus());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

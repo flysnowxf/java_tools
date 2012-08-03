@@ -74,6 +74,10 @@ public class HttpUtils {
 		packageMethod(method, httpRequest);
 		return execute(method, httpRequest, handler);
 	}
+	
+	public static HttpResponse get(HttpRequest httpRequest) {
+		return get(httpRequest, null);
+	}
 
 	public static <T> HttpResponse post(HttpRequest httpRequest, AbstractResultHandler<T> handler) {
 		PostMethod method = new PostMethod(httpRequest.getUrl());
@@ -97,5 +101,9 @@ public class HttpUtils {
 			}
 		}
 		return execute(method, httpRequest, handler);
+	}
+	
+	public static HttpResponse post(HttpRequest httpRequest) {
+		return post(httpRequest, null);
 	}
 }
