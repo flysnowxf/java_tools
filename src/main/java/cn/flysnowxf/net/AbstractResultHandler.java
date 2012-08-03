@@ -18,6 +18,8 @@ public abstract class AbstractResultHandler<T> {
 	protected abstract Result handleResponse(String response);
 	protected abstract void handleSuccess(T t);
 	protected abstract void handleFailure(T t);
+	protected abstract void handleStatusFailure();
+	protected abstract void handleException(Exception e);
 	protected abstract String getStatusLog();
 	protected abstract String getResultLog(T t);
 
@@ -48,12 +50,23 @@ public abstract class AbstractResultHandler<T> {
 			}
 		}
 		else {
+			handleStatusFailure();
 			if(isLog) {
 				log.error("at=" + BASIC.format(new Date()) +
 						"<|>url=" + url + 
 						"<|>status=" + status +
 						"<|>" + getStatusLog());
 			}
+		}
+	}
+	
+	public void exception(Exception e, String url, boolean isLog) {
+		handleException(e);
+		if(isLog) {
+			log.error("at=" + BASIC.format(new Date()) +
+					"<|>url=" + url + 
+					"<|>exception=" + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
