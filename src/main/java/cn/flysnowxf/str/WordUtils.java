@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.wltea.analyzer.IKSegmentation;
-import org.wltea.analyzer.Lexeme;
+import org.wltea.analyzer.core.IKSegmenter;
+import org.wltea.analyzer.core.Lexeme;
 
 public class WordUtils {
 	/**
@@ -19,7 +19,7 @@ public class WordUtils {
 		Set<String> set = new HashSet<String>();
 		
 		StringReader reader = new StringReader(word);
-		IKSegmentation seg = new IKSegmentation(reader);
+		IKSegmenter seg = new IKSegmenter(reader, true);
 		Lexeme lexeme = null;
 		try {
 			while((lexeme = seg.next()) != null){

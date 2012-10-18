@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>org.wltea</groupId>
 			<artifactId>IKAnalyzer</artifactId>
-			<version>3.2.5</version>
+			<version>2012</version>
 		</dependency>
 		<!-- 没有在公共maven的jar-结束 -->
 		<dependency>

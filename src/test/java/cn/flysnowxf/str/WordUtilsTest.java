@@ -9,15 +9,15 @@ import org.junit.Test;
 public class WordUtilsTest {
 	@Test
 	public void participle() {
-		String word = "我们在希望的田野上";
+		String word = "中国人民共和国";
 		List<String> wordList = WordUtils.participle(word);
-		Assert.assertEquals(6, wordList.size());
+		Assert.assertEquals(2, wordList.size());
 	}
 	
 	@Test
 	public void getKeywordsByOr() {
 		String word = "我们在希望的田野上";
 		String keyword = WordUtils.getKeywordsByOr(word);
-		Assert.assertEquals("(田野 OR 在 OR 希望 OR 野上 OR 的 OR 我们)", keyword);
+		Assert.assertEquals("(在 OR 希望 OR 野上 OR 的 OR 我们 OR 田)", keyword);
 	}
 }
