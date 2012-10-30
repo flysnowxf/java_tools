@@ -1,5 +1,7 @@
 package cn.flysnowxf.prop;
 
+import java.util.Date;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -13,5 +15,10 @@ public class PropertyUtilsTest {
 	@Test
 	public void getWeakString() {
 		Assert.assertEquals("flysnowxf", PropertyUtils.getWeakString("test.properties", "name"));
+	}
+	
+	@Test
+	public void setProperties() {
+		PropertyUtils.setProperties("time", new Date().toString(), "test.properties");
 	}
 }

@@ -1,8 +1,14 @@
 package cn.flysnowxf.prop;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.Properties;
+
 
 import cn.flysnowxf.lang.ClassPathResource;
 
@@ -66,5 +72,37 @@ public class PropertyUtils {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * 修改配置文件的配置项
+	 * @param key
+	 * @param value
+	 * @param classPathFile
+	 */
+	public static void setProperties(String key, String value, String classPathFile) {
+		try {
+			Properties prop = new Properties();
+			
+			// if not exists,create it
+			URL url = new ClassPathResource(classPathFile).getInputPath();
+			File file = new File(url.toURI());
+			if(!file.exists()) {
+				file.createNewFile();
+			}
+			
+			// input
+			InputStream in = new FileInputStream(file);
+			prop.load(in);
+			in.close();
+			
+			// output
+			OutputStream out = new FileOutputStream(file);
+			prop.setProperty(key, value);
+			prop.store(out, "Update " + key + "=" + value);
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

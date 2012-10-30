@@ -3,6 +3,7 @@ package cn.flysnowxf.lang;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 public class ClassPathResource {
 	private final String path;
@@ -20,6 +21,10 @@ public class ClassPathResource {
 					getDescription() + " cannot be opened because it does not exist");
 		}
 		return is;
+	}
+	
+	public URL getInputPath() {
+		return this.classLoader.getResource(this.path);
 	}
 	
 	public String getDescription() {
