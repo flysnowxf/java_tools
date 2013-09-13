@@ -14,6 +14,7 @@ public class XmlUtils {
 			throws Exception {
 		JAXBContext context = JAXBContext.newInstance(clazz);
 		Marshaller marshaller = context.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		StringWriter stringWriter = new StringWriter();
 		marshaller.marshal(object, stringWriter);
 
