@@ -21,6 +21,10 @@ public class HttpUtils {
 		// timeout
 		params.setSoTimeout(httpRequest.getSoTimeout());
 		params.setConnectionTimeout(httpRequest.getConnTimeout());
+		// 设置代理
+		if (httpRequest.getProxyHost() != null) {
+			httpClient.getHostConfiguration().setProxy(httpRequest.getProxyHost(), httpRequest.getProxyPort());
+		}
 		
 		return httpClient;
 	}

@@ -23,6 +23,9 @@ public class HttpRequest {
 	private String ua = "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.162 Safari/535.19";
 	// print log
 	private boolean isLog = true;
+	// proxy
+	private String proxyHost;
+	private int proxyPort;
 	
 	public HttpRequest(String url) {
 		this.url = url;
@@ -101,5 +104,21 @@ public class HttpRequest {
 
 	public void setLog(boolean isLog) {
 		this.isLog = isLog;
+	}
+
+	public String getProxyHost() {
+		return proxyHost;
+	}
+
+	public void setProxyHost(String proxyHost) {
+		this.proxyHost = proxyHost;
+	}
+
+	public int getProxyPort() {
+		return proxyPort;
+	}
+
+	public void setProxyPort(int proxyPort) {
+		this.proxyPort = proxyPort;
 	}
 }

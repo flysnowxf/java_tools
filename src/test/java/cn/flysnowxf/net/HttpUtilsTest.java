@@ -30,6 +30,16 @@ public class HttpUtilsTest {
 	}
 	
 	@Test
+	public void proxy() {
+		String url = "http://www.google.com";
+		HttpRequest request = new HttpRequest(url);
+		request.setProxyHost("localhost");
+		request.setProxyPort(1080);
+		HttpResponse httpResponse = HttpUtils.get(request);
+		System.out.println(httpResponse.getResponse());
+	}
+	
+	@Test
 	public void get() {
 		final CallResult callResult = new CallResult();
 		String url = "http://g.cn";
